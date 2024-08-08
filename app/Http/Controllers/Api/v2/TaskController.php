@@ -10,9 +10,11 @@ use App\Models\Task;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->authorizeResource(Task::class);
+    }
+
     public function index()
     {
         return TaskResouer::collection(auth()->user()->tasks()->get());
@@ -32,6 +34,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        
         return  TaskResouer::make($task);
     }
 
